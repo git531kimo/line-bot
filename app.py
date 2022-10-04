@@ -29,7 +29,7 @@ def callback():
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
-        print("Invalid signature. Please check your channel access token/channel secret.")
+       # print("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
 
     return 'OK'
@@ -37,9 +37,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    msg = event.message.text
+    s = '你吃飯了嗎'
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=s))
 
 
 if __name__ == "__main__":
